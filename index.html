@@ -337,10 +337,52 @@
             margin-top: 15px;
             cursor: pointer;
         }
+
+        /* Кнопка "Наверх" */
+        .go-top {
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #1a0000;
+            border: 3px solid #ff0000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            color: #ff0000;
+            cursor: pointer;
+            box-shadow: 0 0 30px #ff0000;
+            transition: all 0.3s;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            text-decoration: none;
+        }
+
+        .go-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .go-top:hover {
+            transform: scale(1.1);
+            background: #330000;
+            box-shadow: 0 0 40px #ff0000;
+        }
+
+        .go-top:active {
+            transform: scale(0.9);
+        }
     </style>
 </head>
 <body>
     <div class="skull-bg"></div>
+
+    <!-- Кнопка "Наверх" -->
+    <a href="#" class="go-top" id="goTop">⬆️</a>
 
     <div class="container">
         <script>
@@ -393,6 +435,16 @@
             }
 
             tg.MainButton.setText('💀 СВЯЗЬ С ДОКСОМ 💀').show().onClick(contactDox);
+
+            // Скрипт для кнопки "Наверх"
+            window.onscroll = function() {
+                const goTop = document.getElementById('goTop');
+                if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                    goTop.classList.add('show');
+                } else {
+                    goTop.classList.remove('show');
+                }
+            };
         </script>
 
         <div class="header">
@@ -577,9 +629,7 @@
             </div>
         </div>
 
-        <!-- Контакты -->
-        <div class="contact-block">
-            <h3>📞 КОНТАКТЫ</h3>
+        <h3>📞 КОНТАКТЫ</h3>
             <p>Telegram: @Cnegovik_Legends</p>
             <p style="color: #00ffff;">⚠️ ДОКС: @Tif09</p>
             <button class="support-btn" onclick="contactDox()">💀 СВЯЗЬ С ДОКСОМ</button>
