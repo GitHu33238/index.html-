@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,8 +19,10 @@
             padding: 16px;
             color: #ff4444;
             position: relative;
+            overflow-x: hidden;
         }
 
+        /* Кровавый фон */
         body::before {
             content: "";
             position: fixed;
@@ -30,19 +32,79 @@
             height: 100%;
             background: repeating-linear-gradient(0deg, rgba(255,0,0,0.05) 0px, #000000 2px, #000000 4px);
             pointer-events: none;
+            z-index: 0;
         }
 
-        .skull-bg {
+        /* Анимированные черепа на фоне */
+        .floating-skull {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%23ff0000" opacity="0.15"><path d="M50 10C30 10 15 30 15 50C15 70 30 90 50 90C70 90 85 70 85 50C85 30 70 10 50 10Z M50 20C65 20 75 35 75 50C75 65 65 80 50 80C35 80 25 65 25 50C25 35 35 20 50 20Z M35 45L45 45L45 55L35 55Z M55 45L65 45L65 55L55 55Z M40 65L60 65L60 70L40 70Z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            z-index: 0;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(100px, 50px) rotate(90deg);
+            }
+            50% {
+                transform: translate(200px, 100px) rotate(180deg);
+            }
+            75% {
+                transform: translate(100px, 150px) rotate(270deg);
+            }
+            100% {
+                transform: translate(0, 200px) rotate(360deg);
+            }
+        }
+
+        /* Кровавые подтёки */
+        .blood-drip {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path fill="%23ff0000" d="M50 10C30 10 15 30 15 50C15 70 30 90 50 90C70 90 85 70 85 50C85 30 70 10 50 10Z M50 20C65 20 75 35 75 50C75 65 65 80 50 80C35 80 25 65 25 50C25 35 35 20 50 20Z M35 45L45 45L45 55L35 55Z M55 45L65 45L65 55L55 55Z M40 65L60 65L60 70L40 70Z"/></svg>');
-            background-repeat: repeat;
-            background-size: 80px;
-            opacity: 0.2;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,0,0,0.1) 100%);
             pointer-events: none;
+            z-index: 1;
+            animation: drip 5s infinite;
+        }
+
+        @keyframes drip {
+            0% {
+                opacity: 0.3;
+                transform: translateY(0);
+            }
+            50% {
+                opacity: 0.5;
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 0.3;
+                transform: translateY(0);
+            }
+        }
+
+        /* Пульсация для кнопок */
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(255, 0, 0, 0.8);
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+            }
         }
 
         .container {
@@ -58,6 +120,7 @@
             margin-bottom: 20px;
             box-shadow: 0 0 30px #ff0000;
             position: relative;
+            animation: pulse 3s infinite;
         }
 
         .online-status {
@@ -80,12 +143,6 @@
             background: #00ff00;
             border-radius: 50%;
             animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(0, 255, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0); }
         }
 
         .online-text {
@@ -122,6 +179,7 @@
             margin: 20px 0;
             text-align: center;
             box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+            animation: pulse 4s infinite;
         }
 
         .counter-number {
@@ -152,6 +210,7 @@
             padding: 20px;
             margin: 20px 0;
             text-align: center;
+            animation: pulse 5s infinite;
         }
 
         .card-number {
@@ -171,6 +230,12 @@
             font-size: 16px;
             width: 100%;
             cursor: pointer;
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .copy-btn:hover {
+            transform: scale(1.05);
         }
 
         .section-title {
@@ -197,7 +262,12 @@
             cursor: pointer;
             box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
             position: relative;
-            transition: all 0.1s;
+            transition: all 0.3s;
+            animation: pulse 3s infinite;
+        }
+
+        .service-btn:hover {
+            transform: scale(1.02);
         }
 
         .service-btn::after {
@@ -207,11 +277,6 @@
             top: 50%;
             transform: translateY(-50%);
             font-size: 30px;
-        }
-
-        .service-btn:active {
-            transform: scale(0.98);
-            background: #330000;
         }
 
         .nft-btn {
@@ -251,6 +316,7 @@
             margin: 15px 0;
             box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
             transition: all 0.3s;
+            animation: pulse 6s infinite;
         }
 
         .review-card:hover {
@@ -309,7 +375,6 @@
             text-align: right;
         }
 
-        /* Стили для FAQ */
         .faq-container {
             margin: 30px 0;
         }
@@ -322,6 +387,7 @@
             margin: 10px 0;
             cursor: pointer;
             transition: all 0.3s;
+            animation: pulse 5s infinite;
         }
 
         .faq-item:hover {
@@ -366,6 +432,7 @@
             padding: 20px;
             margin: 30px 0;
             text-align: center;
+            animation: pulse 4s infinite;
         }
 
         .support-btn {
@@ -378,6 +445,12 @@
             width: 100%;
             margin-top: 15px;
             cursor: pointer;
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .support-btn:hover {
+            transform: scale(1.05);
         }
 
         .go-top {
@@ -401,6 +474,7 @@
             opacity: 0;
             visibility: hidden;
             text-decoration: none;
+            animation: pulse 2s infinite;
         }
 
         .go-top.show {
@@ -410,14 +484,19 @@
 
         .go-top:hover {
             transform: scale(1.1);
-            background: #330000;
         }
     </style>
 </head>
 <body>
-    <div class="skull-bg"></div>
+    <!-- Анимированные черепа -->
+    <div class="floating-skull" style="top: 10%; left: 10%; animation-duration: 25s;"></div>
+    <div class="floating-skull" style="top: 30%; left: 70%; animation-duration: 30s; width: 40px; height: 40px;"></div>
+    <div class="floating-skull" style="top: 60%; left: 20%; animation-duration: 35s; width: 80px; height: 80px;"></div>
+    <div class="floating-skull" style="top: 80%; left: 80%; animation-duration: 40s; width: 50px; height: 50px;"></div>
+    <div class="floating-skull" style="top: 40%; left: 40%; animation-duration: 45s; width: 70px; height: 70px;"></div>
 
-    <a href="#" class="go-top" id="goTop">⬆️</a>
+    <!-- Кровавые подтёки -->
+    <div class="blood-drip"></div>
 
     <div class="container">
         <script>
@@ -479,6 +558,13 @@
                     goTop.classList.remove('show');
                 }
             };
+
+            // FAQ toggle
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
         </script>
 
         <div class="header">
@@ -665,32 +751,32 @@
         <div class="section-title">❓ ЧАСТЫЕ ВОПРОСЫ</div>
 
         <div class="faq-container">
-            <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-item">
                 <div class="faq-question">Как быстро вы отвечаете?</div>
                 <div class="faq-answer">Обычно отвечаю в течение 5–15 минут, если я онлайн. Если офлайн — отвечу, как только появится возможность.</div>
             </div>
 
-            <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-item">
                 <div class="faq-question">Какие гарантии?</div>
                 <div class="faq-answer">Работаю анонимно, но честно. Если не смогу помочь — предложу альтернативу или верну деньги (обсуждается индивидуально).</div>
             </div>
 
-            <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-item">
                 <div class="faq-question">Что делать после оплаты?</div>
                 <div class="faq-answer">1. Переведи нужную сумму на карту 2202 2082 1359 3842<br>2. Сделай скриншот перевода<br>3. Отправь его в поддержку @Tif09<br>4. Дальше я свяжусь с тобой</div>
             </div>
 
-            <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-item">
                 <div class="faq-question">Сколько ждать результат?</div>
                 <div class="faq-answer">• Докс — 10–20 минут<br>• Снос аккаунта — 10–30 минут<br>• Взлом — от 2 часов<br>• NFT — до 24 часов</div>
             </div>
 
-            <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-item">
                 <div class="faq-question">Можно ли вернуть деньги?</div>
                 <div class="faq-answer">Если заказ не был выполнен по моей вине — обсудим возврат. Если передумал после начала работы — возврат не делаю.</div>
             </div>
 
-            <div class="faq-item" onclick="this.classList.toggle('active')">
+            <div class="faq-item">
                 <div class="faq-question">Вы работаете анонимно?</div>
                 <div class="faq-answer">Да. Все данные удаляются после выполнения заказа. Никакой лишней информации не храню.</div>
             </div>
@@ -702,7 +788,8 @@
             <p style="color: #00ffff;">⚠️ ДОКС: @Tif09</p>
             <button class="support-btn" onclick="contactDox()">💀 СВЯЗЬ С ДОКСОМ</button>
         </div>
+
+        <a href="#" class="go-top" id="goTop">⬆️</a>
     </div>
 </body>
 </html>
-<!-- принудительное обновление -->
