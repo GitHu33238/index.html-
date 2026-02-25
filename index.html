@@ -60,7 +60,6 @@
             position: relative;
         }
 
-        /* Онлайн статус */
         .online-status {
             position: absolute;
             top: 20px;
@@ -84,15 +83,9 @@
         }
 
         @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7);
-            }
-            70% {
-                box-shadow: 0 0 0 10px rgba(0, 255, 0, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(0, 255, 0, 0);
-            }
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 255, 0, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0); }
         }
 
         .online-text {
@@ -121,7 +114,6 @@
             text-shadow: 0 0 15px #ff0000;
         }
 
-        /* Счётчик заказов */
         .counter-block {
             background: #1a0000;
             border: 2px solid #ff0000;
@@ -317,6 +309,56 @@
             text-align: right;
         }
 
+        /* Стили для FAQ */
+        .faq-container {
+            margin: 30px 0;
+        }
+
+        .faq-item {
+            background: #1a0000;
+            border: 2px solid #ff0000;
+            border-radius: 30px;
+            padding: 20px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .faq-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px #ff0000;
+        }
+
+        .faq-question {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ff8888;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .faq-question::before {
+            content: "❓";
+            font-size: 24px;
+        }
+
+        .faq-answer {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #330000;
+            border-radius: 20px;
+            color: #ffaa88;
+            font-size: 16px;
+            line-height: 1.5;
+            border-left: 5px solid #ff0000;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
         .contact-block {
             background: #1a0000;
             border: 3px solid #ff0000;
@@ -338,7 +380,6 @@
             cursor: pointer;
         }
 
-        /* Кнопка "Наверх" */
         .go-top {
             position: fixed;
             bottom: 30px;
@@ -370,18 +411,12 @@
         .go-top:hover {
             transform: scale(1.1);
             background: #330000;
-            box-shadow: 0 0 40px #ff0000;
-        }
-
-        .go-top:active {
-            transform: scale(0.9);
         }
     </style>
 </head>
 <body>
     <div class="skull-bg"></div>
 
-    <!-- Кнопка "Наверх" -->
     <a href="#" class="go-top" id="goTop">⬆️</a>
 
     <div class="container">
@@ -436,7 +471,6 @@
 
             tg.MainButton.setText('💀 СВЯЗЬ С ДОКСОМ 💀').show().onClick(contactDox);
 
-            // Скрипт для кнопки "Наверх"
             window.onscroll = function() {
                 const goTop = document.getElementById('goTop');
                 if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
@@ -448,7 +482,6 @@
         </script>
 
         <div class="header">
-            <!-- Онлайн статус -->
             <div class="online-status">
                 <div class="online-dot"></div>
                 <div class="online-text">ONLINE ● Сейчас на сайте</div>
@@ -459,7 +492,6 @@
             <p>⚠️ DOX SERVICE ⚠️</p>
         </div>
 
-        <!-- Счётчик заказов -->
         <div class="counter-block">
             <div class="counter-number">58</div>
             <div class="counter-label">ВЫПОЛНЕННЫХ ЗАКАЗОВ</div>
@@ -629,8 +661,44 @@
             </div>
         </div>
 
-        <h3>📞 КОНТАКТЫ</h3>
-            <p>Telegram: @Cnegovik_Legends</p>
+        <!-- ===== FAQ ===== -->
+        <div class="section-title">❓ ЧАСТЫЕ ВОПРОСЫ</div>
+
+        <div class="faq-container">
+            <div class="faq-item" onclick="this.classList.toggle('active')">
+                <div class="faq-question">Как быстро вы отвечаете?</div>
+                <div class="faq-answer">Обычно отвечаю в течение 5–15 минут, если я онлайн. Если офлайн — отвечу, как только появится возможность.</div>
+            </div>
+
+            <div class="faq-item" onclick="this.classList.toggle('active')">
+                <div class="faq-question">Какие гарантии?</div>
+                <div class="faq-answer">Работаю анонимно, но честно. Если не смогу помочь — предложу альтернативу или верну деньги (обсуждается индивидуально).</div>
+            </div>
+
+            <div class="faq-item" onclick="this.classList.toggle('active')">
+                <div class="faq-question">Что делать после оплаты?</div>
+                <div class="faq-answer">1. Переведи нужную сумму на карту 2202 2082 1359 3842<br>2. Сделай скриншот перевода<br>3. Отправь его в поддержку @Tif09<br>4. Дальше я свяжусь с тобой</div>
+            </div>
+
+            <div class="faq-item" onclick="this.classList.toggle('active')">
+                <div class="faq-question">Сколько ждать результат?</div>
+                <div class="faq-answer">• Докс — 10–20 минут<br>• Снос аккаунта — 10–30 минут<br>• Взлом — от 2 часов<br>• NFT — до 24 часов</div>
+            </div>
+
+            <div class="faq-item" onclick="this.classList.toggle('active')">
+                <div class="faq-question">Можно ли вернуть деньги?</div>
+                <div class="faq-answer">Если заказ не был выполнен по моей вине — обсудим возврат. Если передумал после начала работы — возврат не делаю.</div>
+            </div>
+
+            <div class="faq-item" onclick="this.classList.toggle('active')">
+                <div class="faq-question">Вы работаете анонимно?</div>
+                <div class="faq-answer">Да. Все данные удаляются после выполнения заказа. Никакой лишней информации не храню.</div>
+            </div>
+        </div>
+
+        <!-- Контакты -->
+        <div class="contact-block">
+            <h3>📞 КОНТАКТЫ</h3>
             <p style="color: #00ffff;">⚠️ ДОКС: @Tif09</p>
             <button class="support-btn" onclick="contactDox()">💀 СВЯЗЬ С ДОКСОМ</button>
         </div>
