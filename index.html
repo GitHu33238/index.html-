@@ -173,6 +173,77 @@
             margin-top: 10px;
         }
 
+        /* Стили для отзывов */
+        .reviews-container {
+            margin: 30px 0;
+        }
+
+        .review-card {
+            background: #1a0000;
+            border: 2px solid #ff0000;
+            border-radius: 30px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+
+        .review-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px #ff0000;
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            background: #330000;
+            border: 2px solid #ff0000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff6666;
+        }
+
+        .review-info {
+            flex: 1;
+        }
+
+        .review-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #ff6666;
+        }
+
+        .review-stars {
+            color: gold;
+            font-size: 14px;
+            margin-top: 2px;
+        }
+
+        .review-text {
+            color: #ff8888;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .review-date {
+            color: #666;
+            font-size: 12px;
+            text-align: right;
+        }
+
         .contact-block {
             background: #1a0000;
             border: 3px solid #ff0000;
@@ -365,6 +436,59 @@
             <span class="price-tag" style="background: #ffaa00;">1200 ₽</span>
         </button>
 
+        <!-- ===== ОТЗЫВЫ КЛИЕНТОВ ===== -->
+        <div class="section-title">⭐ ОТЗЫВЫ</div>
+
+        <div class="reviews-container">
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">Д</div>
+                    <div class="review-info">
+                        <div class="review-name">Дмитрий</div>
+                        <div class="review-stars">★★★★★</div>
+                    </div>
+                </div>
+                <div class="review-text">"Всё сделали быстро и качественно! Спасибо, помогли вернуть аккаунт."</div>
+                <div class="review-date">2 дня назад</div>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">А</div>
+                    <div class="review-info">
+                        <div class="review-name">Алексей</div>
+                        <div class="review-stars">★★★★★</div>
+                    </div>
+                </div>
+                <div class="review-text">"Обращался за докс-услугой. Всё четко, без лишних вопросов. Рекомендую!"</div>
+                <div class="review-date">5 дней назад</div>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">М</div>
+                    <div class="review-info">
+                        <div class="review-name">Михаил</div>
+                        <div class="review-stars">★★★★☆</div>
+                    </div>
+                </div>
+                <div class="review-text">"Хороший сервис. Немного долго, но результат порадовал. Буду обращаться ещё."</div>
+                <div class="review-date">1 неделя назад</div>
+            </div>
+
+            <div class="review-card">
+                <div class="review-header">
+                    <div class="review-avatar">К</div>
+                    <div class="review-info">
+                        <div class="review-name">Константин</div>
+                        <div class="review-stars">★★★★★</div>
+                    </div>
+                </div>
+                <div class="review-text">"Снёс аккаунт обидчика за 10 минут. Цена вообще огонь. Спасибо!"</div>
+                <div class="review-date">2 недели назад</div>
+            </div>
+        </div>
+
         <!-- Контакты -->
         <div class="contact-block">
             <h3>📞 КОНТАКТЫ</h3>
@@ -375,5 +499,5 @@
         </div>
     </div>
 </body>
-            </html>
+</html>
 <!-- принудительное обновление -->
