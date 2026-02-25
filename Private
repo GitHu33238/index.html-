@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💀 DOX SERVICE</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+        
+        body {
+            background: #000000;
+            min-height: 100vh;
+            padding: 16px;
+            color: #ff4444;
+            position: relative;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(0deg, rgba(255,0,0,0.05) 0px, #000000 2px, #000000 4px);
+            pointer-events: none;
+        }
+        
+        .skull-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path fill="%23ff0000" d="M50 10C30 10 15 30 15 50C15 70 30 90 50 90C70 90 85 70 85 50C85 30 70 10 50 10Z M50 20C65 20 75 35 75 50C75 65 65 80 50 80C35 80 25 65 25 50C25 35 35 20 50 20Z M35 45L45 45L45 55L35 55Z M55 45L65 45L65 55L55 55Z M40 65L60 65L60 70L40 70Z"/></svg>');
+            background-repeat: repeat;
+            background-size: 80px;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+        
+        .container {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .header {
+            background: rgba(20, 0, 0, 0.95);
+            border: 3px solid #ff0000;
+            border-radius: 30px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 30px #ff0000;
+        }
+        
+        .avatar {
+            width: 80px;
+            height: 80px;
+            background: #330000;
+            border: 3px solid #ff0000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin-bottom: 15px;
+            box-shadow: 0 0 30px #ff0000;
+        }
+        
+        h1 {
+            font-size: 32px;
+            color: #ff0000;
+            text-shadow: 0 0 15px #ff0000;
+        }
+        
+        .card-block {
+            background: #1a0000;
+            border: 2px solid #ff0000;
+            border-radius: 30px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .card-number {
+            font-size: 24px;
+            color: #ff8888;
+            letter-spacing: 3px;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+        
+        .copy-btn {
+            background: #330000;
+            color: #ff0000;
+            border: 2px solid #ff0000;
+            padding: 12px;
+            border-radius: 30px;
+            font-size: 16px;
+            width: 100%;
+            cursor: pointer;
+        }
+        
+        .section-title {
+            color: #ff0000;
+            font-size: 28px;
+            margin: 40px 0 20px;
+            text-align: center;
+            border-bottom: 3px solid #ff0000;
+            padding-bottom: 10px;
+            text-shadow: 0 0 15px #ff0000;
+        }
+        
+        .service-btn {
+            width: 100%;
+            background: #1a0000;
+            border: 3px solid #ff0000;
+            border-radius: 30px;
+            padding: 25px;
+            margin: 15px 0;
+            color: #ff6666;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: left;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+            position: relative;
+        }
+        
+        .service-btn::after {
+            content: "💳";
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 30px;
+        }
+        
+        .service-btn:active {
+            transform: scale(0.98);
+            background: #330000;
+        }
+        
+        .nft-btn {
+            border-color: #aa00ff;
+            color: #ff88ff;
+        }
+        
+        .dox-btn {
+            border-color: #00ffff;
+            color: #88ffff;
+        }
+        
+        .price-tag {
+            display: inline-block;
+            background: #ff0000;
+            color: black;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        
+        .contact-block {
+            background: #1a0000;
+            border: 3px solid #ff0000;
+            border-radius: 30px;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        .support-btn {
+            background: #330000;
+            color: #ff0000;
+            border: 2px solid #ff0000;
+            padding: 15px;
+            border-radius: 30px;
+            font-size: 20px;
+            width: 100%;
+            margin-top: 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="skull-bg"></div>
+    
+    <div class="container">
+        <script>
+            const tg = window.Telegram.WebApp;
+            tg.expand();
+            
+            const cardNumber = '2202208213593842';
+            const cardName = 'Anonymous';
+            
+            function copyCard() {
+                navigator.clipboard.writeText(cardNumber);
+                tg.HapticFeedback.notificationOccurred('success');
+                tg.showPopup({
+                    title: '💀 КАРТА ГОТОВА',
+                    message: '2202 2082 1359 3842',
+                    buttons: [{type: 'ok'}]
+                });
+            }
+            
+            function fastPay(amount, service) {
+                navigator.clipboard.writeText(cardNumber);
+                tg.HapticFeedback.impactOccurred('heavy');
+                
+                tg.showPopup({
+                    title: '💀 ОПЛАТА',
+                    message: `Карта: 2202 2082 1359 3842\nСумма: ${amount}₽\nУслуга: ${service}\n\nПолучатель: Anonymous`,
+                    buttons: [
+                        {id: 'copy', text: '📋 Копировать карту'},
+                        {id: 'sber', text: '🏦 Открыть Сбер'},
+                        {type: 'close'}
+                    ]
+                }, (btnId) => {
+                    if (btnId === 'copy') {
+                        navigator.clipboard.writeText(cardNumber);
+                    } else if (btnId === 'sber') {
+                        window.location.href = 'https://online.sberbank.ru/';
+                    }
+                });
+            }
+            
+            function contactDox() {
+                tg.openTelegramLink('https://t.me/Tif09');
+            }
+            
+            tg.MainButton.setText('💀 СВЯЗЬ С ДОКСОМ 💀').show().onClick(contactDox);
+        </script>
+
+        <div class="header">
+            <div class="avatar">💀</div>
+            <h1>ANONYMOUS</h1>
+            <p>⚠️ DOX SERVICE ⚠️</p>
+        </div>
+
+        <div class="card-block">
+            <div class="card-number">2202 2082 1359 3842</div>
+            <div style="color: #ff6666; margin-bottom: 10px;">Anonymous</div>
+            <button class="copy-btn" onclick="copyCard()">📋 СКОПИРОВАТЬ КАРТУ</button>
+        </div>
+
+        <div class="section-title">🎨 NFT 300₽</div>
+
+        <button class="service-btn nft-btn" onclick="fastPay(300, 'Создание NFT')">
+            🖼️ СОЗДАНИЕ NFT
+            <span class="price-tag" style="background: #aa00ff;">300 ₽</span>
+        </button>
+
+        <button class="service-btn nft-btn" onclick="fastPay(300, 'NFT аватар')">
+            📸 NFT АВАТАР
+            <span class="price-tag" style="background: #aa00ff;">300 ₽</span>
+        </button>
+
+        <button class="service-btn nft-btn" onclick="fastPay(300, 'NFT для игр')">
+            🎮 NFT ДЛЯ ИГР
+            <span class="price-tag" style="background: #aa00ff;">300 ₽</span>
+        </button>
+
+        <button class="service-btn nft-btn" onclick="fastPay(300, 'Mint NFT')">
+            🔷 MINT NFT
+            <span class="price-tag" style="background: #aa00ff;">300 ₽</span>
+        </button>
+
+        <div class="section-title">🔍 ДОКС УСЛУГИ</div>
+
+        <button class="service-btn dox-btn" onclick="fastPay(3000, 'Защита')">
+            😡 ЗАЩИТА
+            <span class="price-tag" style="background: #00ffff; color: black;">3 000 ₽</span>
+        </button>
+
+        <button class="service-btn dox-btn" onclick="fastPay(210, 'Снос аккаунта')">
+            💥 СНОС АККАУНТА
+            <span class="price-tag" style="background: #00ffff; color: black;">210 ₽</span>
+        </button>
+
+        <button class="service-btn dox-btn" onclick="fastPay(210, 'Возврат аккаунта')">
+            🔄 ВОЗВРАТ
+            <span class="price-tag" style="background: #00ffff; color: black;">210 ₽</span>
+        </button>
+
+        <button class="service-btn dox-btn" onclick="fastPay(310, 'Взлом')">
+            🔓 ВЗЛОМ
+            <span class="price-tag" style="background: #00ffff; color: black;">310 ₽</span>
+        </button>
+
+        <button class="service-btn dox-btn" onclick="fastPay(50, 'Бомбер')">
+            💣 БОМБЕР
+            <span class="price-tag" style="background: #00ffff; color: black;">50 ₽</span>
+        </button>
+
+        <button class="service-btn dox-btn" onclick="fastPay(310, 'Докс семья')">
+            📁 ДОКС СЕМЬЯ
+            <span class="price-tag" style="background: #00ffff; color: black;">310 ₽</span>
+        </button>
+
+        <button class="service-btn dox-btn" onclick="fastPay(150, 'Докс 1 чел')">
+            👤 ДОКС 1 ЧЕЛ
+            <span class="price-tag" style="background: #00ffff; color: black;">150 ₽</span>
+        </button>
+
+        <button class="service-btn dox-btn" onclick="fastPay(150, 'Разморозка')">
+            ❄️ РАЗМОРОЗКА
+            <span class="price-tag" style="background: #00ffff; color: black;">150 ₽</span>
+        </button>
+
+        <button class="service-btn dox-btn" onclick="fastPay(500, 'Деф')">
+            🛡️ ДЕФ
+            <span class="price-tag" style="background: #00ffff; color: black;">500 ₽</span>
+        </button>
+
+        <button class="service-btn dox-btn" onclick="fastPay(500, 'Сносер')">
+            💻 СНОСЕР
+            <span class="price-tag" style="background: #00ffff; color: black;">500 ₽</span>
+        </button>
+
+        <button class="service-btn dox-btn" onclick="fastPay(350, 'Снос сессий')">
+            📱 СНОС СЕССИЙ
+            <span class="price-tag" style="background: #00ffff; color: black;">350 ₽</span>
+        </button>
+
+        <div class="contact-block">
+            <h3>📞 КОНТАКТЫ</h3>
+            <p>Email: aleshakistauri@gmail.com</p>
+            <p>Telegram: @Cnegovik_Legends</p>
+            <p style="color: #00ffff;">⚠️ ДОКС: @Tif09</p>
+            <button class="support-btn" onclick="contactDox()">💀 СВЯЗЬ С ДОКСОМ</button>
+        </div>
+    </div>
+</body>
+</html>
