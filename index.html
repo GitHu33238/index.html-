@@ -286,33 +286,26 @@
                 });
             }
 
-            function openSberApp() {
-                // Попытка открыть приложение Сбера
-                window.location.href = 'sberbank://';
-                
-                // Если приложение не открылось, через 300ms открываем веб-версию
-                setTimeout(function() {
-                    window.location.href = 'https://online.sberbank.ru/';
-                }, 300);
-            }
-
             function fastPay(amount, service) {
                 // Копируем карту
                 navigator.clipboard.writeText(cardNumber);
                 tg.HapticFeedback.impactOccurred('heavy');
 
-                // Показываем окно с кнопками
                 tg.showPopup({
                     title: '💀 ОПЛАТА',
                     message: `Карта: 2202 2082 1359 3842\nСумма: ${amount}₽\nУслуга: ${service}\n\nПолучатель: Anonymous`,
                     buttons: [
-                        {id: 'app', text: '🏦 Открыть в приложении'},
+                        {id: 'app', text: '🏦 Открыть Сбер'},
                         {id: 'copy', text: '📋 Копировать карту'},
                         {type: 'close'}
                     ]
                 }, (btnId) => {
                     if (btnId === 'app') {
-                        openSberApp();
+                        tg.close(); // Закрываем Web App
+                        setTimeout(() => {
+                            // Открываем ссылку в браузере (или приложении)
+                            window.location.href = 'https://online.sberbank.ru/';
+                        }, 100);
                     } else if (btnId === 'copy') {
                         navigator.clipboard.writeText(cardNumber);
                         tg.HapticFeedback.notificationOccurred('success');
