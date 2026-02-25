@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💀 DOX SERVICE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>💀 DOX SERVICE MEGA ULTRA</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         * {
@@ -19,8 +19,12 @@
             padding: 16px;
             color: #ff4444;
             position: relative;
+            overflow-x: hidden;
         }
 
+        /* ===== АТМОСФЕРА ===== */
+        
+        /* Кровавый фон */
         body::before {
             content: "";
             position: fixed;
@@ -30,21 +34,234 @@
             height: 100%;
             background: repeating-linear-gradient(0deg, rgba(255,0,0,0.05) 0px, #000000 2px, #000000 4px);
             pointer-events: none;
+            z-index: 0;
         }
 
-        .skull-bg {
+        /* Анимированные черепа */
+        .floating-skull {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%23ff0000" opacity="0.15"><path d="M50 10C30 10 15 30 15 50C15 70 30 90 50 90C70 90 85 70 85 50C85 30 70 10 50 10Z M50 20C65 20 75 35 75 50C75 65 65 80 50 80C35 80 25 65 25 50C25 35 35 20 50 20Z M35 45L45 45L45 55L35 55Z M55 45L65 45L65 55L55 55Z M40 65L60 65L60 70L40 70Z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            z-index: 0;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(100px, 50px) rotate(90deg); }
+            50% { transform: translate(200px, 100px) rotate(180deg); }
+            75% { transform: translate(100px, 150px) rotate(270deg); }
+            100% { transform: translate(0, 200px) rotate(360deg); }
+        }
+
+        /* Кровавые подтёки */
+        .blood-drip {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path fill="%23ff0000" d="M50 10C30 10 15 30 15 50C15 70 30 90 50 90C70 90 85 70 85 50C85 30 70 10 50 10Z M50 20C65 20 75 35 75 50C75 65 65 80 50 80C35 80 25 65 25 50C25 35 35 20 50 20Z M35 45L45 45L45 55L35 55Z M55 45L65 45L65 55L55 55Z M40 65L60 65L60 70L40 70Z"/></svg>');
-            background-repeat: repeat;
-            background-size: 80px;
-            opacity: 0.2;
+            background: linear-gradient(180deg, transparent 0%, rgba(255,0,0,0.1) 100%);
             pointer-events: none;
+            z-index: 1;
+            animation: drip 5s infinite;
         }
 
+        @keyframes drip {
+            0% { opacity: 0.3; transform: translateY(0); }
+            50% { opacity: 0.5; transform: translateY(10px); }
+            100% { opacity: 0.3; transform: translateY(0); }
+        }
+
+        /* Огонь по краям */
+        .fire-border {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+            background: radial-gradient(circle at 20% 20%, rgba(255,0,0,0.2) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255,0,0,0.2) 0%, transparent 50%),
+                        radial-gradient(circle at 20% 80%, rgba(255,0,0,0.2) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(255,0,0,0.2) 0%, transparent 50%);
+            animation: fire-flicker 0.5s infinite alternate;
+        }
+
+        @keyframes fire-flicker {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.8; }
+        }
+
+        /* Молнии */
+        .lightning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.8);
+            pointer-events: none;
+            z-index: 3;
+            opacity: 0;
+            animation: lightning-flash 10s infinite;
+        }
+
+        @keyframes lightning-flash {
+            0%, 95% { opacity: 0; }
+            96% { opacity: 0.8; }
+            97% { opacity: 0; }
+            98% { opacity: 0.5; }
+            99% { opacity: 0; }
+        }
+
+        /* Красный туман */
+        .red-mist {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 40%, rgba(255,0,0,0.1) 0%, transparent 60%);
+            pointer-events: none;
+            z-index: 1;
+            animation: mist-move 20s infinite alternate;
+        }
+
+        @keyframes mist-move {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.2) translate(20px, 20px); }
+        }
+
+        /* Следящие глаза */
+        .eye {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            background: #ffffff;
+            border-radius: 50%;
+            border: 2px solid #ff0000;
+            pointer-events: none;
+            z-index: 5;
+            opacity: 0.3;
+        }
+
+        .eye::after {
+            content: "";
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff0000;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: eye-move 3s infinite alternate;
+        }
+
+        /* Падающий пепел */
+        .ash {
+            position: fixed;
+            width: 5px;
+            height: 5px;
+            background: rgba(255,0,0,0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 4;
+            animation: ash-fall 10s linear infinite;
+        }
+
+        @keyframes ash-fall {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Кровавый дождь */
+        .rain {
+            position: fixed;
+            width: 2px;
+            height: 15px;
+            background: linear-gradient(180deg, #ff0000, transparent);
+            pointer-events: none;
+            z-index: 4;
+            animation: rain-fall 1s linear infinite;
+        }
+
+        @keyframes rain-fall {
+            0% { transform: translateY(-100px); opacity: 0.8; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        /* Летучие мыши */
+        .bat {
+            position: fixed;
+            width: 30px;
+            height: 20px;
+            background: #1a0000;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 4;
+            opacity: 0.2;
+            animation: bat-fly 15s linear infinite;
+        }
+
+        .bat::before {
+            content: "🦇";
+            position: absolute;
+            font-size: 20px;
+            color: #ff0000;
+            left: -10px;
+            top: -10px;
+        }
+
+        @keyframes bat-fly {
+            0% { transform: translate(-100px, 20vh) rotate(0deg); }
+            100% { transform: translate(100vw, 80vh) rotate(360deg); }
+        }
+
+        /* Паутина */
+        .web {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle at 0 0, rgba(255,0,0,0.1) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* ===== ПУЛЬСАЦИЯ ===== */
+        @keyframes pulse {
+            0% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(255, 0, 0, 0.8); }
+            100% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.3); }
+        }
+
+        /* Тряска */
+        @keyframes shake {
+            0% { transform: translate(0, 0); }
+            10% { transform: translate(-5px, 0); }
+            20% { transform: translate(5px, 0); }
+            30% { transform: translate(0, 5px); }
+            40% { transform: translate(0, -5px); }
+            50% { transform: translate(5px, 5px); }
+            60% { transform: translate(-5px, -5px); }
+            70% { transform: translate(0, 0); }
+        }
+
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        /* ===== ОСНОВНЫЕ СТИЛИ ===== */
         .container {
             position: relative;
             z-index: 10;
@@ -58,6 +275,7 @@
             margin-bottom: 20px;
             box-shadow: 0 0 30px #ff0000;
             position: relative;
+            animation: pulse 3s infinite;
         }
 
         .online-status {
@@ -82,16 +300,26 @@
             animation: pulse 2s infinite;
         }
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(0, 255, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 255, 0, 0); }
-        }
-
         .online-text {
             color: #00ff00;
             font-size: 14px;
             font-weight: bold;
+        }
+
+        .visitor-counter {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            color: #666;
+            font-size: 12px;
+        }
+
+        .time-counter {
+            position: absolute;
+            bottom: 10px;
+            left: 20px;
+            color: #666;
+            font-size: 12px;
         }
 
         .avatar {
@@ -106,6 +334,12 @@
             font-size: 40px;
             margin-bottom: 15px;
             box-shadow: 0 0 30px #ff0000;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .avatar:active {
+            transform: scale(1.1);
         }
 
         h1 {
@@ -114,6 +348,265 @@
             text-shadow: 0 0 15px #ff0000;
         }
 
+        /* Прогресс */
+        .progress-block {
+            background: #1a0000;
+            border: 2px solid #ff0000;
+            border-radius: 30px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            animation: pulse 3s infinite;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #330000;
+            border-radius: 15px;
+            margin: 15px 0;
+            overflow: hidden;
+            border: 1px solid #ff0000;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 58%;
+            background: linear-gradient(90deg, #ff0000, #ff6666);
+            animation: progress-pulse 2s infinite;
+        }
+
+        @keyframes progress-pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        /* Преимущества */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .feature-item {
+            background: #1a0000;
+            border: 2px solid #ff0000;
+            border-radius: 20px;
+            padding: 15px;
+            text-align: center;
+            animation: pulse 4s infinite;
+            cursor: pointer;
+        }
+
+        .feature-item:active {
+            transform: scale(0.95);
+        }
+
+        .feature-icon {
+            font-size: 30px;
+            margin-bottom: 5px;
+        }
+
+        .feature-text {
+            color: #ff8888;
+            font-size: 14px;
+        }
+
+        /* Схема работы */
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+            margin: 20px 0;
+        }
+
+        .step {
+            background: #1a0000;
+            border: 2px solid #ff0000;
+            border-radius: 15px;
+            padding: 10px;
+            text-align: center;
+            position: relative;
+            animation: pulse 5s infinite;
+            cursor: pointer;
+        }
+
+        .step-number {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 25px;
+            height: 25px;
+            background: #ff0000;
+            color: black;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Акции */
+        .promo-block {
+            background: linear-gradient(145deg, #1a0000, #330000);
+            border: 3px solid gold;
+            border-radius: 30px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+
+        .promo-title {
+            color: gold;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .promo-code {
+            background: #000;
+            color: gold;
+            padding: 10px;
+            border-radius: 15px;
+            font-size: 20px;
+            margin: 10px 0;
+            border: 1px dashed gold;
+        }
+
+        /* Крипта */
+        .crypto-block {
+            background: #1a0000;
+            border: 2px solid #ffaa00;
+            border-radius: 30px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .crypto-address {
+            background: #330000;
+            padding: 10px;
+            border-radius: 15px;
+            color: #ffaa00;
+            font-size: 14px;
+            word-break: break-all;
+        }
+
+        /* Тест */
+        .test-block {
+            background: #1a0000;
+            border: 2px solid #ff0000;
+            border-radius: 30px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .test-question {
+            color: #ff8888;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+
+        .test-option {
+            background: #330000;
+            border: 1px solid #ff0000;
+            border-radius: 15px;
+            padding: 10px;
+            margin: 5px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .test-option:hover {
+            background: #440000;
+        }
+
+        .test-option.selected {
+            background: #ff0000;
+            color: black;
+        }
+
+        .test-result {
+            margin-top: 15px;
+            padding: 15px;
+            background: #220000;
+            border-radius: 15px;
+            color: #ffaa88;
+            display: none;
+        }
+
+        /* Гадание */
+        .fortune-block {
+            background: #1a0000;
+            border: 2px solid #aa00ff;
+            border-radius: 30px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .fortune-ball {
+            width: 100px;
+            height: 100px;
+            background: #330000;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            cursor: pointer;
+            border: 3px solid #aa00ff;
+            transition: all 0.3s;
+        }
+
+        .fortune-ball:active {
+            transform: scale(0.9);
+        }
+
+        .fortune-text {
+            color: #ff88ff;
+            font-size: 18px;
+            min-height: 60px;
+        }
+
+        /* Мини-игра */
+        .game-block {
+            background: #1a0000;
+            border: 2px solid #ff0000;
+            border-radius: 30px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .game-target {
+            width: 100px;
+            height: 100px;
+            background: #ff0000;
+            border-radius: 50%;
+            margin: 20px auto;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            animation: pulse 1s infinite;
+            transition: all 0.1s;
+        }
+
+        .game-target:active {
+            transform: scale(0.8);
+        }
+
+        .game-score {
+            font-size: 24px;
+            color: #ff0000;
+        }
+
+        /* Счётчики */
         .counter-block {
             background: #1a0000;
             border: 2px solid #ff0000;
@@ -121,7 +614,7 @@
             padding: 25px;
             margin: 20px 0;
             text-align: center;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+            animation: pulse 4s infinite;
         }
 
         .counter-number {
@@ -133,16 +626,83 @@
             margin-bottom: 5px;
         }
 
-        .counter-label {
-            color: #ff8888;
-            font-size: 18px;
-            letter-spacing: 2px;
+        /* Карта */
+        .map-block {
+            background: #1a0000;
+            border: 2px solid #ff0000;
+            border-radius: 30px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
         }
 
-        .counter-small {
-            color: #666;
-            font-size: 14px;
-            margin-top: 5px;
+        .map-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 5px;
+            margin: 15px 0;
+        }
+
+        .map-dot {
+            width: 100%;
+            padding-bottom: 100%;
+            background: #330000;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .map-dot.active {
+            background: #ff0000;
+            animation: pulse 1s infinite;
+        }
+
+        /* Награды */
+        .awards-block {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .award {
+            width: 70px;
+            height: 70px;
+            background: #330000;
+            border: 2px solid gold;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            animation: pulse 3s infinite;
+        }
+
+        /* VIP */
+        .vip-block {
+            background: linear-gradient(145deg, #1a0000, #4a0000);
+            border: 3px solid gold;
+            border-radius: 30px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+
+        .vip-price {
+            font-size: 48px;
+            color: gold;
+            margin: 10px 0;
+        }
+
+        /* Срочно */
+        .urgent-block {
+            background: #330000;
+            border: 3px solid #ff0000;
+            border-radius: 30px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            animation: shake 5s infinite;
         }
 
         .card-block {
@@ -171,6 +731,7 @@
             font-size: 16px;
             width: 100%;
             cursor: pointer;
+            animation: pulse 2s infinite;
         }
 
         .section-title {
@@ -195,9 +756,8 @@
             font-weight: bold;
             text-align: left;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
             position: relative;
-            transition: all 0.1s;
+            animation: pulse 3s infinite;
         }
 
         .service-btn::after {
@@ -209,25 +769,9 @@
             font-size: 30px;
         }
 
-        .service-btn:active {
-            transform: scale(0.98);
-            background: #330000;
-        }
-
-        .nft-btn {
-            border-color: #aa00ff;
-            color: #ff88ff;
-        }
-
-        .dox-btn {
-            border-color: #00ffff;
-            color: #88ffff;
-        }
-
-        .cyber-btn {
-            border-color: #ffaa00;
-            color: #ffaa66;
-        }
+        .nft-btn { border-color: #aa00ff; color: #ff88ff; }
+        .dox-btn { border-color: #00ffff; color: #88ffff; }
+        .cyber-btn { border-color: #ffaa00; color: #ffaa66; }
 
         .price-tag {
             display: inline-block;
@@ -239,23 +783,14 @@
             margin-top: 10px;
         }
 
-        .reviews-container {
-            margin: 30px 0;
-        }
-
+        .reviews-container { margin: 30px 0; }
         .review-card {
             background: #1a0000;
             border: 2px solid #ff0000;
             border-radius: 30px;
             padding: 20px;
             margin: 15px 0;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
-            transition: all 0.3s;
-        }
-
-        .review-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 30px #ff0000;
+            animation: pulse 6s infinite;
         }
 
         .review-header {
@@ -279,22 +814,13 @@
             color: #ff6666;
         }
 
-        .review-info {
-            flex: 1;
-        }
-
+        .review-info { flex: 1; }
         .review-name {
             font-size: 18px;
             font-weight: bold;
             color: #ff6666;
         }
-
-        .review-stars {
-            color: gold;
-            font-size: 14px;
-            margin-top: 2px;
-        }
-
+        .review-stars { color: gold; font-size: 14px; margin-top: 2px; }
         .review-text {
             color: #ff8888;
             font-size: 16px;
@@ -302,17 +828,9 @@
             margin-bottom: 10px;
             font-style: italic;
         }
+        .review-date { color: #666; font-size: 12px; text-align: right; }
 
-        .review-date {
-            color: #666;
-            font-size: 12px;
-            text-align: right;
-        }
-
-        .faq-container {
-            margin: 30px 0;
-        }
-
+        .faq-container { margin: 30px 0; }
         .faq-item {
             background: #1a0000;
             border: 2px solid #ff0000;
@@ -320,14 +838,8 @@
             padding: 20px;
             margin: 10px 0;
             cursor: pointer;
-            transition: all 0.3s;
+            animation: pulse 5s infinite;
         }
-
-        .faq-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 30px #ff0000;
-        }
-
         .faq-question {
             display: flex;
             align-items: center;
@@ -336,12 +848,7 @@
             font-size: 20px;
             font-weight: bold;
         }
-
-        .faq-question::before {
-            content: "❓";
-            font-size: 24px;
-        }
-
+        .faq-question::before { content: "❓"; font-size: 24px; }
         .faq-answer {
             display: none;
             margin-top: 15px;
@@ -349,14 +856,8 @@
             background: #330000;
             border-radius: 20px;
             color: #ffaa88;
-            font-size: 16px;
-            line-height: 1.5;
-            border-left: 5px solid #ff0000;
         }
-
-        .faq-item.active .faq-answer {
-            display: block;
-        }
+        .faq-item.active .faq-answer { display: block; }
 
         .contact-block {
             background: #1a0000;
@@ -365,6 +866,7 @@
             padding: 20px;
             margin: 30px 0;
             text-align: center;
+            animation: pulse 4s infinite;
         }
 
         .support-btn {
@@ -377,6 +879,7 @@
             width: 100%;
             margin-top: 15px;
             cursor: pointer;
+            animation: pulse 2s infinite;
         }
 
         .go-top {
@@ -395,26 +898,100 @@
             color: #ff0000;
             cursor: pointer;
             box-shadow: 0 0 30px #ff0000;
-            transition: all 0.3s;
             z-index: 1000;
             opacity: 0;
             visibility: hidden;
-            text-decoration: none;
+            animation: pulse 2s infinite;
         }
 
-        .go-top.show {
-            opacity: 1;
-            visibility: visible;
+        .go-top.show { opacity: 1; visibility: visible; }
+
+        .face-flash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="%23ff0000" opacity="0.5"><circle cx="50" cy="40" r="10"/><circle cx="50" cy="70" r="20"/><circle cx="30" cy="35" r="3" fill="white"/><circle cx="70" cy="35" r="3" fill="white"/></svg>') center/contain no-repeat;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.1s;
         }
 
-        .go-top:hover {
-            transform: scale(1.1);
-            background: #330000;
+        .face-flash.show {
+            opacity: 0.5;
+            animation: face-fade 0.5s;
+        }
+
+        @keyframes face-fade {
+            0% { opacity: 0.5; }
+            100% { opacity: 0; }
+        }
+
+        .age-restriction {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background: #1a0000;
+            border: 2px solid #ff0000;
+            border-radius: 20px;
+            padding: 5px 15px;
+            color: #ff0000;
+            font-weight: bold;
+            z-index: 100;
         }
     </style>
 </head>
 <body>
-    <div class="skull-bg"></div>
+    <!-- ===== АТМОСФЕРА ===== -->
+    <div class="fire-border"></div>
+    <div class="lightning"></div>
+    <div class="red-mist"></div>
+    <div class="blood-drip"></div>
+    <div class="web" style="top: 0; left: 0;"></div>
+    <div class="web" style="bottom: 0; right: 0; transform: rotate(180deg);"></div>
+    <div class="face-flash" id="faceFlash"></div>
+    <div class="age-restriction">🔞 18+ ONLY</div>
+
+    <!-- Черепа -->
+    <div class="floating-skull" style="top: 5%; left: 5%;"></div>
+    <div class="floating-skull" style="top: 15%; left: 85%; width: 40px; height: 40px;"></div>
+    <div class="floating-skull" style="top: 30%; left: 20%; width: 80px; height: 80px;"></div>
+    <div class="floating-skull" style="top: 50%; left: 70%; width: 50px; height: 50px;"></div>
+    <div class="floating-skull" style="top: 70%; left: 30%; width: 70px; height: 70px;"></div>
+    <div class="floating-skull" style="top: 85%; left: 60%; width: 45px; height: 45px;"></div>
+
+    <!-- Глаза -->
+    <div class="eye" style="top: 20%; left: 20%;"></div>
+    <div class="eye" style="top: 40%; left: 80%;"></div>
+    <div class="eye" style="top: 60%; left: 40%;"></div>
+    <div class="eye" style="top: 80%; left: 60%;"></div>
+
+    <!-- Летучие мыши -->
+    <div class="bat" style="top: 10%; animation-delay: 0s;"></div>
+    <div class="bat" style="top: 30%; animation-delay: 5s;"></div>
+    <div class="bat" style="top: 50%; animation-delay: 10s;"></div>
+
+    <!-- Пепел и дождь -->
+    <script>
+        for(let i = 0; i < 30; i++) {
+            let ash = document.createElement('div');
+            ash.className = 'ash';
+            ash.style.left = Math.random() * 100 + '%';
+            ash.style.animationDelay = Math.random() * 10 + 's';
+            ash.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            document.body.appendChild(ash);
+        }
+        for(let i = 0; i < 50; i++) {
+            let rain = document.createElement('div');
+            rain.className = 'rain';
+            rain.style.left = Math.random() * 100 + '%';
+            rain.style.animationDelay = Math.random() * 1 + 's';
+            rain.style.animationDuration = (Math.random() * 0.5 + 0.5) + 's';
+            document.body.appendChild(rain);
+        }
+    </script>
 
     <div class="container">
         <script>
@@ -424,6 +1001,108 @@
             const cardNumber = '2202208213593842';
             const cardName = 'Anonymous';
 
+            // Счётчик времени
+            let seconds = 0;
+            setInterval(() => {
+                seconds++;
+                document.getElementById('timeCounter').textContent = seconds;
+            }, 1000);
+
+            // Счётчик посетителей
+            let visitors = Math.floor(Math.random() * 10) + 5;
+            document.getElementById('visitorCounter').textContent = visitors;
+
+            // Звуки (имитация)
+            function playSound(type) {
+                if (navigator.vibrate) {
+                    if (type === 'scream') navigator.vibrate([100, 100, 100]);
+                    if (type === 'whisper') navigator.vibrate(50);
+                    if (type === 'shot') navigator.vibrate(30);
+                }
+            }
+
+            // Внезапное лицо
+            function showFace() {
+                const face = document.getElementById('faceFlash');
+                face.classList.add('show');
+                setTimeout(() => face.classList.remove('show'), 300);
+                playSound('scream');
+            }
+
+            // Тряска
+            function shakeScreen() {
+                document.body.classList.add('shake');
+                setTimeout(() => document.body.classList.remove('shake'), 500);
+            }
+
+            // Рандомные события
+            setInterval(() => {
+                if (Math.random() < 0.1) { // 10% шанс каждые 30 сек
+                    showFace();
+                }
+            }, 30000);
+
+            // Клик на череп
+            function skullClick() {
+                let count = localStorage.getItem('skullClicks') || 0;
+                count++;
+                localStorage.setItem('skullClicks', count);
+                if (count % 10 === 0) {
+                    alert('💀 ТЫ НАЖАЛ ' + count + ' РАЗ! ПОЛУЧИ СЮРПРИЗ!');
+                    showFace();
+                    shakeScreen();
+                }
+            }
+
+            // Тест
+            function selectOption(option) {
+                document.querySelectorAll('.test-option').forEach(el => el.classList.remove('selected'));
+                option.classList.add('selected');
+                const result = document.getElementById('testResult');
+                result.style.display = 'block';
+                if (option.textContent.includes('докс')) {
+                    result.innerHTML = '🔥 ТЕБЕ ПОДОЙДЁТ: ДОКС УСЛУГИ';
+                } else if (option.textContent.includes('снос')) {
+                    result.innerHTML = '💥 ТЕБЕ ПОДОЙДЁТ: СНОС АККАУНТА';
+                } else {
+                    result.innerHTML = '🎨 ТЕБЕ ПОДОЙДЁТ: NFT';
+                }
+            }
+
+            // Гадание
+            const fortunes = [
+                '🎱 ДА',
+                '🎱 НЕТ',
+                '🎱 СКОРО',
+                '🎱 НИКОГДА',
+                '🎱 ВОЗМОЖНО',
+                '🎱 ТОЧНО ДА',
+                '🎱 СПРОСИ ПОЗЖЕ',
+                '🎱 НЕ РАССЧИТЫВАЙ'
+            ];
+            function shakeBall() {
+                const random = Math.floor(Math.random() * fortunes.length);
+                document.getElementById('fortuneText').textContent = fortunes[random];
+                playSound('whisper');
+            }
+
+            // Мини-игра
+            let gameScore = 0;
+            function clickTarget() {
+                gameScore++;
+                document.getElementById('gameScore').textContent = gameScore;
+                const target = document.getElementById('gameTarget');
+                target.style.transform = 'scale(0.8)';
+                setTimeout(() => target.style.transform = 'scale(1)', 100);
+                
+                const x = Math.random() * 200 - 100;
+                const y = Math.random() * 200 - 100;
+                target.style.transform = `translate(${x}px, ${y}px) scale(0.8)`;
+                setTimeout(() => target.style.transform = `translate(${x}px, ${y}px) scale(1)`, 100);
+                
+                playSound('shot');
+            }
+
             function copyCard() {
                 navigator.clipboard.writeText(cardNumber);
                 tg.HapticFeedback.notificationOccurred('success');
@@ -432,6 +1111,7 @@
                     message: '2202 2082 1359 3842',
                     buttons: [{type: 'ok'}]
                 });
+                playSound('shot');
             }
 
             function fastPay(amount, service) {
@@ -467,6 +1147,28 @@
             }
 
             tg.MainButton.setText('💀 СВЯЗЬ С ДОКСОМ 💀').show().onClick(contactDox);
+
+            window.onscroll = function() {
+                const goTop = document.getElementById('goTop');
+                if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                    goTop.classList.add('show');
+                } else {
+                    goTop.classList.remove('show');
+                }
+            };
+
+            // FAQ toggle
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
+            });
+
+            // Внезапный крик при нажатии на череп
+            document.querySelector('.avatar').addEventListener('click', () => {
+                skullClick();
+                showFace();
+            });
         </script>
 
         <div class="header">
@@ -474,131 +1176,160 @@
                 <div class="online-dot"></div>
                 <div class="online-text">ONLINE ● Сейчас на сайте</div>
             </div>
-
+            <div class="visitor-counter">👁️ <span id="visitorCounter">0</span> чел.</div>
+            <div class="time-counter">⏱️ <span id="timeCounter">0</span> сек</div>
             <div class="avatar">💀</div>
             <h1>ANONYMOUS</h1>
             <p>⚠️ DOX SERVICE ⚠️</p>
         </div>
 
+        <!-- Акция -->
+        <div class="promo-block">
+            <div class="promo-title">🔥 АКЦИЯ 🔥</div>
+            <div class="promo-code">ПРИВЕДИ ДРУГА - СКИДКА 10%</div>
+            <div>ПРОМОКОД: FRIEND10</div>
+        </div>
+
+        <!-- Счётчик -->
         <div class="counter-block">
             <div class="counter-number">58</div>
             <div class="counter-label">ВЫПОЛНЕННЫХ ЗАКАЗОВ</div>
             <div class="counter-small">с создания сайта</div>
         </div>
 
+        <!-- Прогресс -->
+        <div class="progress-block">
+            <div>🔥 ЦЕЛЬ: 100 ЗАКАЗОВ</div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div>Осталось 42 заказа</div>
+        </div>
+
+        <!-- Преимущества -->
+        <div class="features-grid">
+            <div class="feature-item"><div class="feature-icon">⚡</div><div class="feature-text">Анонимно</div></div>
+            <div class="feature-item"><div class="feature-icon">🔥</div><div class="feature-text">Быстро</div></div>
+            <div class="feature-item"><div class="feature-icon">💀</div><div class="feature-text">Надёжно</div></div>
+            <div class="feature-item"><div class="feature-icon">💰</div><div class="feature-text">Дёшево</div></div>
+        </div>
+
+        <!-- Схема работы -->
+        <div class="steps-container">
+            <div class="step"><span class="step-number">1</span>💳 Оплата</div>
+            <div class="step"><span class="step-number">2</span>📸 Скрин</div>
+            <div class="step"><span class="step-number">3</span>📨 Отправить</div>
+            <div class="step"><span class="step-number">4</span>✅ Готово</div>
+        </div>
+
+        <!-- Крипта -->
+        <div class="crypto-block">
+            <div>₿ КРИПТО-ОПЛАТА</div>
+            <div class="crypto-address">BTC: bc1q...xyz</div>
+            <div class="crypto-address">ETH: 0x742...3f9</div>
+        </div>
+
+        <!-- VIP -->
+        <div class="vip-block">
+            <div>👑 VIP СТАТУС</div>
+            <div class="vip-price">999₽ / мес</div>
+            <div>⚡ Приоритетная поддержка</div>
+            <div>🔥 Скидка 20% на всё</div>
+        </div>
+
+        <!-- Срочно -->
+        <div class="urgent-block">
+            <div>⚡ СРОЧНОЕ ВЫПОЛНЕНИЕ</div>
+            <div>+50% к цене, но сделаем за 1 час</div>
+        </div>
+
+        <!-- Карта -->
         <div class="card-block">
             <div class="card-number">2202 2082 1359 3842</div>
             <div style="color: #ff6666; margin-bottom: 10px;">Anonymous</div>
             <button class="copy-btn" onclick="copyCard()">📋 СКОПИРОВАТЬ КАРТУ</button>
         </div>
 
-        <!-- ===== NFT 300₽ ===== -->
+        <!-- Тест -->
+        <div class="section-title">🧠 ТЕСТ: КАКАЯ УСЛУГА ТЕБЕ НУЖНА?</div>
+        <div class="test-block">
+            <div class="test-question">Что тебе нужно?</div>
+            <div class="test-option" onclick="selectOption(this)">🔍 Найти информацию о человеке</div>
+            <div class="test-option" onclick="selectOption(this)">💥 Удалить аккаунт</div>
+            <div class="test-option" onclick="selectOption(this)">🎨 Создать NFT</div>
+            <div class="test-result" id="testResult">Выбери вариант</div>
+        </div>
+
+        <!-- Гадание -->
+        <div class="section-title">🎱 МАГИЧЕСКИЙ ШАР</div>
+        <div class="fortune-block">
+            <div class="fortune-ball" onclick="shakeBall()">🔮</div>
+            <div class="fortune-text" id="fortuneText">НАЖМИ НА ШАР</div>
+        </div>
+
+        <!-- Мини-игра -->
+        <div class="section-title">🎮 КЛИКЕР</div>
+        <div class="game-block">
+            <div class="game-target" id="gameTarget" onclick="clickTarget()">💀</div>
+            <div class="game-score">СЧЁТ: <span id="gameScore">0</span></div>
+        </div>
+
+        <!-- Карта клиентов -->
+        <div class="section-title">🗺️ КАРТА КЛИЕНТОВ</div>
+        <div class="map-block">
+            <div class="map-grid">
+                <div class="map-dot active"></div>
+                <div class="map-dot"></div>
+                <div class="map-dot active"></div>
+                <div class="map-dot"></div>
+                <div class="map-dot active"></div>
+                <div class="map-dot"></div>
+                <div class="map-dot active"></div>
+                <div class="map-dot"></div>
+                <div class="map-dot"></div>
+                <div class="map-dot active"></div>
+            </div>
+            <div>🌍 Москва, СПб, Киев, Минск...</div>
+        </div>
+
+        <!-- Награды -->
+        <div class="section-title">🏆 НАГРАДЫ</div>
+        <div class="awards-block">
+            <div class="award">⚡</div>
+            <div class="award">🔥</div>
+            <div class="award">💀</div>
+        </div>
+
+        <!-- NFT -->
         <div class="section-title">🎨 NFT 300₽</div>
+        <button class="service-btn nft-btn" onclick="fastPay(300, 'Создание NFT')">🖼️ СОЗДАНИЕ NFT <span class="price-tag" style="background: #aa00ff;">300 ₽</span></button>
+        <button class="service-btn nft-btn" onclick="fastPay(300, 'NFT аватар')">📸 NFT АВАТАР <span class="price-tag" style="background: #aa00ff;">300 ₽</span></button>
+        <button class="service-btn nft-btn" onclick="fastPay(300, 'NFT для игр')">🎮 NFT ДЛЯ ИГР <span class="price-tag" style="background: #aa00ff;">300 ₽</span></button>
+        <button class="service-btn nft-btn" onclick="fastPay(300, 'Mint NFT')">🔷 MINT NFT <span class="price-tag" style="background: #aa00ff;">300 ₽</span></button>
 
-        <button class="service-btn nft-btn" onclick="fastPay(300, 'Создание NFT')">
-            🖼️ СОЗДАНИЕ NFT
-            <span class="price-tag" style="background: #aa00ff;">300 ₽</span>
-        </button>
-
-        <button class="service-btn nft-btn" onclick="fastPay(300, 'NFT аватар')">
-            📸 NFT АВАТАР
-            <span class="price-tag" style="background: #aa00ff;">300 ₽</span>
-        </button>
-
-        <button class="service-btn nft-btn" onclick="fastPay(300, 'NFT для игр')">
-            🎮 NFT ДЛЯ ИГР
-            <span class="price-tag" style="background: #aa00ff;">300 ₽</span>
-        </button>
-
-        <button class="service-btn nft-btn" onclick="fastPay(300, 'Mint NFT')">
-            🔷 MINT NFT
-            <span class="price-tag" style="background: #aa00ff;">300 ₽</span>
-        </button>
-
-        <!-- ===== ДОКС УСЛУГИ ===== -->
+        <!-- ДОКС -->
         <div class="section-title">🔍 ДОКС УСЛУГИ</div>
+        <button class="service-btn dox-btn" onclick="fastPay(3000, 'Защита')">😡 ЗАЩИТА <span class="price-tag" style="background: #00ffff; color: black;">3 000 ₽</span></button>
+        <button class="service-btn dox-btn" onclick="fastPay(210, 'Снос аккаунта')">💥 СНОС АККАУНТА <span class="price-tag" style="background: #00ffff; color: black;">210 ₽</span></button>
+        <button class="service-btn dox-btn" onclick="fastPay(210, 'Возврат аккаунта')">🔄 ВОЗВРАТ <span class="price-tag" style="background: #00ffff; color: black;">210 ₽</span></button>
+        <button class="service-btn dox-btn" onclick="fastPay(310, 'Взлом')">🔓 ВЗЛОМ <span class="price-tag" style="background: #00ffff; color: black;">310 ₽</span></button>
+        <button class="service-btn dox-btn" onclick="fastPay(50, 'Бомбер')">💣 БОМБЕР <span class="price-tag" style="background: #00ffff; color: black;">50 ₽</span></button>
+        <button class="service-btn dox-btn" onclick="fastPay(310, 'Докс семья')">📁 ДОКС СЕМЬЯ <span class="price-tag" style="background: #00ffff; color: black;">310 ₽</span></button>
+        <button class="service-btn dox-btn" onclick="fastPay(150, 'Докс 1 чел')">👤 ДОКС 1 ЧЕЛ <span class="price-tag" style="background: #00ffff; color: black;">150 ₽</span></button>
+        <button class="service-btn dox-btn" onclick="fastPay(150, 'Разморозка')">❄️ РАЗМОРОЗКА <span class="price-tag" style="background: #00ffff; color: black;">150 ₽</span></button>
+        <button class="service-btn dox-btn" onclick="fastPay(500, 'Деф')">🛡️ ДЕФ <span class="price-tag" style="background: #00ffff; color: black;">500 ₽</span></button>
+        <button class="service-btn dox-btn" onclick="fastPay(500, 'Сносер')">💻 СНОСЕР <span class="price-tag" style="background: #00ffff; color: black;">500 ₽</span></button>
+        <button class="service-btn dox-btn" onclick="fastPay(350, 'Снос сессий')">📱 СНОС СЕССИЙ <span class="price-tag" style="background: #00ffff; color: black;">350 ₽</span></button>
 
-        <button class="service-btn dox-btn" onclick="fastPay(3000, 'Защита')">
-            😡 ЗАЩИТА
-            <span class="price-tag" style="background: #00ffff; color: black;">3 000 ₽</span>
-        </button>
-
-        <button class="service-btn dox-btn" onclick="fastPay(210, 'Снос аккаунта')">
-            💥 СНОС АККАУНТА
-            <span class="price-tag" style="background: #00ffff; color: black;">210 ₽</span>
-        </button>
-
-        <button class="service-btn dox-btn" onclick="fastPay(210, 'Возврат аккаунта')">
-            🔄 ВОЗВРАТ
-            <span class="price-tag" style="background: #00ffff; color: black;">210 ₽</span>
-        </button>
-
-        <button class="service-btn dox-btn" onclick="fastPay(310, 'Взлом')">
-            🔓 ВЗЛОМ
-            <span class="price-tag" style="background: #00ffff; color: black;">310 ₽</span>
-        </button>
-
-        <button class="service-btn dox-btn" onclick="fastPay(50, 'Бомбер')">
-            💣 БОМБЕР
-            <span class="price-tag" style="background: #00ffff; color: black;">50 ₽</span>
-        </button>
-
-        <button class="service-btn dox-btn" onclick="fastPay(310, 'Докс семья')">
-            📁 ДОКС СЕМЬЯ
-            <span class="price-tag" style="background: #00ffff; color: black;">310 ₽</span>
-        </button>
-
-        <button class="service-btn dox-btn" onclick="fastPay(150, 'Докс 1 чел')">
-            👤 ДОКС 1 ЧЕЛ
-            <span class="price-tag" style="background: #00ffff; color: black;">150 ₽</span>
-        </button>
-
-        <button class="service-btn dox-btn" onclick="fastPay(150, 'Разморозка')">
-            ❄️ РАЗМОРОЗКА
-            <span class="price-tag" style="background: #00ffff; color: black;">150 ₽</span>
-        </button>
-
-        <button class="service-btn dox-btn" onclick="fastPay(500, 'Деф')">
-            🛡️ ДЕФ
-            <span class="price-tag" style="background: #00ffff; color: black;">500 ₽</span>
-        </button>
-
-        <button class="service-btn dox-btn" onclick="fastPay(500, 'Сносер')">
-            💻 СНОСЕР
-            <span class="price-tag" style="background: #00ffff; color: black;">500 ₽</span>
-        </button>
-
-        <button class="service-btn dox-btn" onclick="fastPay(350, 'Снос сессий')">
-            📱 СНОС СЕССИЙ
-            <span class="price-tag" style="background: #00ffff; color: black;">350 ₽</span>
-        </button>
-
-        <!-- ===== НОВЫЕ КИБЕР-УСЛУГИ ===== -->
+        <!-- КИБЕР -->
         <div class="section-title">💻 КИБЕР-УСЛУГИ</div>
+        <button class="service-btn cyber-btn" onclick="fastPay(150, 'Взлом почты')">📧 ВЗЛОМ ПОЧТЫ <span class="price-tag" style="background: #ffaa00;">150 ₽</span></button>
+        <button class="service-btn cyber-btn" onclick="fastPay(600, 'Взлом Telegram')">✈️ ВЗЛОМ TELEGRAM <span class="price-tag" style="background: #ffaa00;">300–900 ₽</span></button>
+        <button class="service-btn cyber-btn" onclick="fastPay(150, 'Удаление фото')">🖼️ УДАЛЕНИЕ ФОТО <span class="price-tag" style="background: #ffaa00;">150 ₽</span></button>
+        <button class="service-btn cyber-btn" onclick="fastPay(1200, 'Восстановление данных')">💾 ВОССТАНОВЛЕНИЕ ДАННЫХ <span class="price-tag" style="background: #ffaa00;">1200 ₽</span></button>
 
-        <button class="service-btn cyber-btn" onclick="fastPay(150, 'Взлом почты')">
-            📧 ВЗЛОМ ПОЧТЫ
-            <span class="price-tag" style="background: #ffaa00;">150 ₽</span>
-        </button>
-
-        <button class="service-btn cyber-btn" onclick="fastPay(600, 'Взлом Telegram')">
-            ✈️ ВЗЛОМ TELEGRAM
-            <span class="price-tag" style="background: #ffaa00;">300–900 ₽</span>
-        </button>
-
-        <button class="service-btn cyber-btn" onclick="fastPay(150, 'Удаление фото')">
-            🖼️ УДАЛЕНИЕ ФОТО
-            <span class="price-tag" style="background: #ffaa00;">150 ₽</span>
-        </button>
-
-        <button class="service-btn cyber-btn" onclick="fastPay(1200, 'Восстановление данных')">
-            💾 ВОССТАНОВЛЕНИЕ ДАННЫХ
-            <span class="price-tag" style="background: #ffaa00;">1200 ₽</span>
-        </button>
-
-        <!-- ===== ОТЗЫВЫ КЛИЕНТОВ ===== -->
+        <!-- Отзывы -->
         <div class="section-title">⭐ ОТЗЫВЫ</div>
-
         <div class="reviews-container">
             <div class="review-card">
                 <div class="review-header">
@@ -611,7 +1342,6 @@
                 <div class="review-text">"Всё сделали быстро и качественно! Спасибо, помогли вернуть аккаунт."</div>
                 <div class="review-date">2 дня назад</div>
             </div>
-
             <div class="review-card">
                 <div class="review-header">
                     <div class="review-avatar">А</div>
@@ -623,7 +1353,6 @@
                 <div class="review-text">"Обращался за докс-услугой. Всё четко, без лишних вопросов. Рекомендую!"</div>
                 <div class="review-date">5 дней назад</div>
             </div>
-
             <div class="review-card">
                 <div class="review-header">
                     <div class="review-avatar">М</div>
@@ -635,7 +1364,6 @@
                 <div class="review-text">"Хороший сервис. Немного долго, но результат порадовал. Буду обращаться ещё."</div>
                 <div class="review-date">1 неделя назад</div>
             </div>
-
             <div class="review-card">
                 <div class="review-header">
                     <div class="review-avatar">К</div>
@@ -649,42 +1377,17 @@
             </div>
         </div>
 
-        <!-- ===== FAQ ===== -->
-        <div class="section-title">❓ ЧАСТЫЕ ВОПРОСЫ</div>
-
+        <!-- FAQ -->
+        <div class="section-title">❓ FAQ</div>
         <div class="faq-container">
-            <div class="faq-item">
-                <div class="faq-question">Как быстро вы отвечаете?</div>
-                <div class="faq-answer">Обычно отвечаю в течение 5–15 минут, если я онлайн. Если офлайн — отвечу, как только появится возможность.</div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">Какие гарантии?</div>
-                <div class="faq-answer">Работаю анонимно, но честно. Если не смогу помочь — предложу альтернативу или верну деньги (обсуждается индивидуально).</div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">Что делать после оплаты?</div>
-                <div class="faq-answer">1. Переведи нужную сумму на карту 2202 2082 1359 3842<br>2. Сделай скриншот перевода<br>3. Отправь его в поддержку @Tif09<br>4. Дальше я свяжусь с тобой</div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">Сколько ждать результат?</div>
-                <div class="faq-answer">• Докс — 10–20 минут<br>• Снос аккаунта — 10–30 минут<br>• Взлом — от 2 часов<br>• NFT — до 24 часов</div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">Можно ли вернуть деньги?</div>
-                <div class="faq-answer">Если заказ не был выполнен по моей вине — обсудим возврат. Если передумал после начала работы — возврат не делаю.</div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">Вы работаете анонимно?</div>
-                <div class="faq-answer">Да. Все данные удаляются после выполнения заказа. Никакой лишней информации не храню.</div>
-            </div>
+            <div class="faq-item"><div class="faq-question">Как быстро?</div><div class="faq-answer">Докс — 10–20 мин</div></div>
+            <div class="faq-item"><div class="faq-question">Гарантии?</div><div class="faq-answer">Анонимно и честно</div></div>
+            <div class="faq-item"><div class="faq-question">После оплаты?</div><div class="faq-answer">Скрин @Tif09</div></div>
+            <div class="faq-item"><div class="faq-question">Возврат?</div><div class="faq-answer">Если не выполню</div></div>
+            <div class="faq-item"><div class="faq-question">Анонимно?</div><div class="faq-answer">Да, данные удаляю</div></div>
         </div>
 
-        <!-- ===== КОНТАКТЫ ===== -->
+        <!-- Контакты -->
         <div class="contact-block">
             <h3>📞 КОНТАКТЫ</h3>
             <p style="color: #00ffff;">⚠️ ДОКС: @Tif09</p>
@@ -695,20 +1398,10 @@
     </div>
 
     <script>
-        // Кнопка "Наверх"
-        window.onscroll = function() {
-            const goTop = document.getElementById('goTop');
-            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-                goTop.classList.add('show');
-            } else {
-                goTop.classList.remove('show');
-            }
-        };
-
-        // FAQ toggle
-        document.querySelectorAll('.faq-item').forEach(item => {
-            item.addEventListener('click', () => {
-                item.classList.toggle('active');
+        // Дополнительные эффекты
+        document.querySelectorAll('.feature-item, .step, .service-btn, .copy-btn').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                if (Math.random() < 0.1) playSound('whisper');
             });
         });
     </script>
