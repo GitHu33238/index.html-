@@ -287,7 +287,6 @@
             }
 
             function fastPay(amount, service) {
-                // Копируем карту
                 navigator.clipboard.writeText(cardNumber);
                 tg.HapticFeedback.impactOccurred('heavy');
 
@@ -301,10 +300,14 @@
                     ]
                 }, (btnId) => {
                     if (btnId === 'app') {
-                        tg.close(); // Закрываем Web App
+                        tg.close();
                         setTimeout(() => {
-                            // Открываем ссылку в браузере (или приложении)
-                            window.location.href = 'https://online.sberbank.ru/';
+                            // Сначала пробуем открыть приложение
+                            window.location.href = 'sberbank://';
+                            // Если не открылось, через 300ms открываем веб
+                            setTimeout(() => {
+                                window.location.href = 'https://online.sberbank.ru/';
+                            }, 300);
                         }, 100);
                     } else if (btnId === 'copy') {
                         navigator.clipboard.writeText(cardNumber);
