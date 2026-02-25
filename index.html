@@ -79,6 +79,38 @@
             text-shadow: 0 0 15px #ff0000;
         }
 
+        /* Счётчик заказов */
+        .counter-block {
+            background: #1a0000;
+            border: 2px solid #ff0000;
+            border-radius: 30px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+        }
+
+        .counter-number {
+            font-size: 64px;
+            font-weight: bold;
+            color: #ff0000;
+            text-shadow: 0 0 20px #ff0000;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+
+        .counter-label {
+            color: #ff8888;
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+
+        .counter-small {
+            color: #666;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
         .card-block {
             background: #1a0000;
             border: 2px solid #ff0000;
@@ -302,9 +334,7 @@
                     if (btnId === 'app') {
                         tg.close();
                         setTimeout(() => {
-                            // Сначала пробуем открыть приложение
                             window.location.href = 'sberbank://';
-                            // Если не открылось, через 300ms открываем веб
                             setTimeout(() => {
                                 window.location.href = 'https://online.sberbank.ru/';
                             }, 300);
@@ -327,6 +357,13 @@
             <div class="avatar">💀</div>
             <h1>ANONYMOUS</h1>
             <p>⚠️ DOX SERVICE ⚠️</p>
+        </div>
+
+        <!-- Счётчик заказов -->
+        <div class="counter-block">
+            <div class="counter-number">58</div>
+            <div class="counter-label">ВЫПОЛНЕННЫХ ЗАКАЗОВ</div>
+            <div class="counter-small">с создания сайта</div>
         </div>
 
         <div class="card-block">
@@ -492,10 +529,9 @@
             </div>
         </div>
 
-        <!-- Контакты -->
+        <!-- Контакты (email удалён) -->
         <div class="contact-block">
             <h3>📞 КОНТАКТЫ</h3>
-            <p>Email: aleshakistauri@gmail.com</p>
             <p>Telegram: @Cnegovik_Legends</p>
             <p style="color: #00ffff;">⚠️ ДОКС: @Tif09</p>
             <button class="support-btn" onclick="contactDox()">💀 СВЯЗЬ С ДОКСОМ</button>
