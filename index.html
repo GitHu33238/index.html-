@@ -12,7 +12,7 @@
             box-sizing: border-box;
             font-family: 'Courier New', monospace;
         }
-        
+
         body {
             background: #000000;
             min-height: 100vh;
@@ -20,7 +20,7 @@
             color: #ff4444;
             position: relative;
         }
-        
+
         body::before {
             content: "";
             position: fixed;
@@ -31,7 +31,7 @@
             background: repeating-linear-gradient(0deg, rgba(255,0,0,0.05) 0px, #000000 2px, #000000 4px);
             pointer-events: none;
         }
-        
+
         .skull-bg {
             position: fixed;
             top: 0;
@@ -44,12 +44,12 @@
             opacity: 0.2;
             pointer-events: none;
         }
-        
+
         .container {
             position: relative;
             z-index: 10;
         }
-        
+
         .header {
             background: rgba(20, 0, 0, 0.95);
             border: 3px solid #ff0000;
@@ -58,7 +58,7 @@
             margin-bottom: 20px;
             box-shadow: 0 0 30px #ff0000;
         }
-        
+
         .avatar {
             width: 80px;
             height: 80px;
@@ -72,13 +72,13 @@
             margin-bottom: 15px;
             box-shadow: 0 0 30px #ff0000;
         }
-        
+
         h1 {
             font-size: 32px;
             color: #ff0000;
             text-shadow: 0 0 15px #ff0000;
         }
-        
+
         .card-block {
             background: #1a0000;
             border: 2px solid #ff0000;
@@ -87,7 +87,7 @@
             margin: 20px 0;
             text-align: center;
         }
-        
+
         .card-number {
             font-size: 24px;
             color: #ff8888;
@@ -95,7 +95,7 @@
             margin: 10px 0;
             font-family: monospace;
         }
-        
+
         .copy-btn {
             background: #330000;
             color: #ff0000;
@@ -106,7 +106,7 @@
             width: 100%;
             cursor: pointer;
         }
-        
+
         .section-title {
             color: #ff0000;
             font-size: 28px;
@@ -116,7 +116,7 @@
             padding-bottom: 10px;
             text-shadow: 0 0 15px #ff0000;
         }
-        
+
         .service-btn {
             width: 100%;
             background: #1a0000;
@@ -131,8 +131,9 @@
             cursor: pointer;
             box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
             position: relative;
+            transition: all 0.1s;
         }
-        
+
         .service-btn::after {
             content: "💳";
             position: absolute;
@@ -141,22 +142,27 @@
             transform: translateY(-50%);
             font-size: 30px;
         }
-        
+
         .service-btn:active {
             transform: scale(0.98);
             background: #330000;
         }
-        
+
         .nft-btn {
             border-color: #aa00ff;
             color: #ff88ff;
         }
-        
+
         .dox-btn {
             border-color: #00ffff;
             color: #88ffff;
         }
-        
+
+        .cyber-btn {
+            border-color: #ffaa00;
+            color: #ffaa66;
+        }
+
         .price-tag {
             display: inline-block;
             background: #ff0000;
@@ -166,7 +172,7 @@
             font-size: 18px;
             margin-top: 10px;
         }
-        
+
         .contact-block {
             background: #1a0000;
             border: 3px solid #ff0000;
@@ -175,7 +181,7 @@
             margin: 30px 0;
             text-align: center;
         }
-        
+
         .support-btn {
             background: #330000;
             color: #ff0000;
@@ -191,15 +197,15 @@
 </head>
 <body>
     <div class="skull-bg"></div>
-    
+
     <div class="container">
         <script>
             const tg = window.Telegram.WebApp;
             tg.expand();
-            
+
             const cardNumber = '2202208213593842';
             const cardName = 'Anonymous';
-            
+
             function copyCard() {
                 navigator.clipboard.writeText(cardNumber);
                 tg.HapticFeedback.notificationOccurred('success');
@@ -209,11 +215,11 @@
                     buttons: [{type: 'ok'}]
                 });
             }
-            
+
             function fastPay(amount, service) {
                 navigator.clipboard.writeText(cardNumber);
                 tg.HapticFeedback.impactOccurred('heavy');
-                
+
                 tg.showPopup({
                     title: '💀 ОПЛАТА',
                     message: `Карта: 2202 2082 1359 3842\nСумма: ${amount}₽\nУслуга: ${service}\n\nПолучатель: Anonymous`,
@@ -230,11 +236,11 @@
                     }
                 });
             }
-            
+
             function contactDox() {
                 tg.openTelegramLink('https://t.me/Tif09');
             }
-            
+
             tg.MainButton.setText('💀 СВЯЗЬ С ДОКСОМ 💀').show().onClick(contactDox);
         </script>
 
@@ -250,6 +256,7 @@
             <button class="copy-btn" onclick="copyCard()">📋 СКОПИРОВАТЬ КАРТУ</button>
         </div>
 
+        <!-- ===== NFT 300₽ ===== -->
         <div class="section-title">🎨 NFT 300₽</div>
 
         <button class="service-btn nft-btn" onclick="fastPay(300, 'Создание NFT')">
@@ -272,6 +279,7 @@
             <span class="price-tag" style="background: #aa00ff;">300 ₽</span>
         </button>
 
+        <!-- ===== ДОКС УСЛУГИ ===== -->
         <div class="section-title">🔍 ДОКС УСЛУГИ</div>
 
         <button class="service-btn dox-btn" onclick="fastPay(3000, 'Защита')">
@@ -329,6 +337,35 @@
             <span class="price-tag" style="background: #00ffff; color: black;">350 ₽</span>
         </button>
 
+        <!-- ===== НОВЫЕ КИБЕР-УСЛУГИ ===== -->
+        <div class="section-title">💻 КИБЕР-УСЛУГИ</div>
+
+        <button class="service-btn cyber-btn" onclick="fastPay(150, 'Взлом почты')">
+            📧 ВЗЛОМ ПОЧТЫ
+            <span class="price-tag" style="background: #ffaa00;">150 ₽</span>
+        </button>
+
+        <button class="service-btn cyber-btn" onclick="fastPay(600, 'Взлом Telegram')">
+            ✈️ ВЗЛОМ TELEGRAM
+            <span class="price-tag" style="background: #ffaa00;">300–900 ₽</span>
+        </button>
+
+        <button class="service-btn cyber-btn" onclick="fastPay(150, 'Удаление фото')">
+            🖼️ УДАЛЕНИЕ ФОТО
+            <span class="price-tag" style="background: #ffaa00;">150 ₽</span>
+        </button>
+
+        <button class="service-btn cyber-btn" onclick="fastPay(700, 'Оформление канала')">
+            📢 ОФОРМЛЕНИЕ КАНАЛА
+            <span class="price-tag" style="background: #ffaa00;">700 ₽</span>
+        </button>
+
+        <button class="service-btn cyber-btn" onclick="fastPay(1200, 'Восстановление данных')">
+            💾 ВОССТАНОВЛЕНИЕ ДАННЫХ
+            <span class="price-tag" style="background: #ffaa00;">1200 ₽</span>
+        </button>
+
+        <!-- Контакты -->
         <div class="contact-block">
             <h3>📞 КОНТАКТЫ</h3>
             <p>Email: aleshakistauri@gmail.com</p>
@@ -338,4 +375,4 @@
         </div>
     </div>
 </body>
-</html>
+            </html>
